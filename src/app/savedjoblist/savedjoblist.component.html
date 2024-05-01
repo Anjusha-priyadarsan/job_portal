@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<div class="row p-3 m-2">
+    <div class="col-lg-2  " id="nav">
+        <div class="row mt-3">
+            <div class="shadow p-3 text-center">
+                <img [src]="userObject.profile" width="80px" height="80px" style="border-radius: 50%;" alt="">
+                <h4 class="mt-2">{{userObject.username}}</h4>
+                <span class="text-secondary">{{userObject.designation}}</span>
+            </div>
+
+        </div>
+        <div class="row mt-3 ">
+            <div id="links" class="shadow ">
+                <hr>
+                <a routerLink="/userdash">
+                    <div ><i class="fa-solid fa-table-columns" ></i>&nbsp;&nbsp;Dashboard</div>
+                </a>
+                
+                <hr>
+                <a routerLink="/edituser">
+                    <div><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;Edit Profile</div>
+                </a>
+                <hr>
+                <a routerLink="/appliedjobs">
+                    <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Applied Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/savedjobs">
+                    <div style="background-color: #85d39d; " class="p-2"><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Saved Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/searchjob">
+                    <div><i class="fa-solid fa-list" ></i>&nbsp;&nbsp;Jobs</div>
+                </a>
+                <hr>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 p-2 shadow mt-3 " style="margin-left: 26px;">
+
+         <div class="row m-2">
+
+      <div class="row">
+       
+          <!-- <input class="form-control" class="w-100" type="text"> -->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input [(ngModel)]="jobTitle"  type="text" class="form-control" placeholder="Search by job title"
+              aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        
+        
+      </div>
+
+      <div class="row mt-5 p-5">
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+          <div *ngIf="jobs.length === 0 && !error" class="alert alert-info" role="alert">
+            No jobs found.
+          </div>
+          <div *ngFor="let job of jobs | savedjobsearch : jobTitle : 'title'" class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ job.savedjob.title }}</h5>
+              <h6 class="card-title text-secondary">{{ job.company.companyname }}</h6>
+
+              <!-- <p class="card-text">{{ job.description }}</p> -->
+              <div class="border p-2" style="background-color: rgb(238, 235, 229)">
+                <p><i class="fa-solid fa-location-dot"></i> &nbsp; {{ job.company.location }}</p>
+                <p><i class="fa-regular fa-clock"></i>&nbsp; {{ job.savedjob.type }}</p>
+                <p><i class="fa-solid fa-indian-rupee-sign"></i>&nbsp; {{ job.savedjob.salary }}</p>
+              </div>
+              <a  routerLink="/view/{{job.savedjob.job_id}}" class="btn btn-success w-100 mt-4">Details</a>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+
+
+</div>

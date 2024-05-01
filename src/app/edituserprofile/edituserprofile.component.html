@@ -1,0 +1,183 @@
+<app-header></app-header>
+
+
+<div class="row p-3 m-2">
+    <div class="col-lg-2  " id="nav">
+        <div class="row mt-3">
+            <div class="shadow p-3 text-center">
+                <img [src]="userObject.profile" width="80px" height="80px" style="border-radius: 50%;" alt="">
+                <h4 class="mt-2">{{userObject.username}}</h4>
+                <span class="text-secondary">{{userObject.designation}}</span>
+            </div>
+
+        </div>
+        <div class="row mt-3 ">
+            <div id="links" class="shadow ">
+                <hr>
+                <a routerLink="/userdash">
+                    <div><i class="fa-solid fa-table-columns" ></i>&nbsp;&nbsp;Dashboard</div>
+                </a>
+                
+                <hr>
+                <a routerLink="/edituser">
+                    <div  style="background-color: #85d39d;" class="p-2"><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;Edit Profile</div>
+                </a>
+                <hr>
+                <a routerLink="/appliedjobs">
+                    <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Applied Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/savedjobs">
+                    <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Saved Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/searchjob">
+                    <div><i class="fa-solid fa-list" ></i>&nbsp;&nbsp;Jobs</div>
+                </a>
+                <hr>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 p-2">
+
+        <div class="row m-2">
+
+            <div  class="container">
+       <form (ngSubmit)="updatePro()" [formGroup]="userUpdate">
+            <div class="row shadow p-5">
+                <h3 class="text-center text-dark">UPDATE YOUR PROFILE</h3>
+                <div class="text-center">
+                    <label for="p1">
+        
+                        <input (change)="getFile($event)" type="file" id="p1" style="display: none;" formControlName="profile">
+                        <img style="border-radius: 50%;" [src]="profile" alt="" width="100px" height="100px">
+                    </label>
+                </div>
+        
+                <div class="col-lg-6 text-center mt-3 ">
+                    
+                    <div class="form-floating mb-2">
+                        <input [(ngModel)]="userObject.username" type="text" class="form-control" id="uuname" name="uname" placeholder="Name"
+                            formControlName="uname">
+                        <label for="floatingInput"> Name</label>
+                    </div>
+                    <!-- <div class="form-floating mb-2">
+                        <input  type="text" class="form-control" id="eemail" name="email" placeholder="email"
+                            formControlName="email">
+                        <label for="floatingInput"> email</label>
+                    </div> -->
+                    <div class="form-floating mb-2">
+                        <input  [(ngModel)]="userObject.phone" type="text" class="form-control" id="pphone" name="phone" placeholder="phone"
+                            formControlName="phone">
+                        <label for="floatingInput">Phone</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <textarea  [(ngModel)]="userObject.introduction" class="form-control " placeholder="Brief intro about yoursels" id="iintro"
+                            formControlName="intro"></textarea>
+                        <label for="floatingTextarea">Intro</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input [value]="formattedDOB"  [(ngModel)]="userObject.dob " type="text" class="form-control" id="date" name="ddate" placeholder="DOB" formControlName="dob">
+                        <label for="floatingInput">DOB</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input  [(ngModel)]="userObject.qualification" type="text" class="form-control" id="qquali" name="quali" placeholder="Highest Qualification"
+                            formControlName="quali">
+                        <label for="floatingInput"> Highest Qualification</label>
+                    </div>
+                    
+                    
+        
+                </div>
+                <div class="col-lg-6 mt-3">
+
+
+                    <div class="form-floating mb-2">
+                        <input  [(ngModel)]="userObject.stream" type="text" class="form-control" id="strm" name="stream" placeholder="Stream"
+                            formControlName="stream">
+                        <label for="floatingInput"> Stream</label>
+                    </div>
+                    
+        
+        
+                    <div class="form-floating ">
+                        <input  [(ngModel)]="logInfo.password" type="password" class="form-control" id="pwd1" name="pswd" placeholder="Password"
+                            formControlName="pwd">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    
+                    
+                    <div class="form-floating mt-2">
+                        <input  [(ngModel)]="userObject.location" type="text" class="form-control" id="loc" name="location" placeholder="Location"
+                            formControlName="loc">
+                        <label for="floatingPassword">Location</label>
+                    </div>
+                    <div class="form-floating mt-2">
+                        <input  [(ngModel)]="userObject.designation" type="text" class="form-control" id="ds" name="desig" placeholder="Designation"
+                            formControlName="desig">
+                        <label for="floatingInput"> Designation</label>
+                    </div>
+
+
+                     <!-- Provide a link to download the uploaded resume -->
+  <div *ngIf="userObject.resume">
+    <a [href]="userObject.resume" download="resume.pdf">Download added Resume</a>
+  </div>
+                     <!-- Display user resume name -->
+                     <!-- <div class="form-floating mt-3">
+                        <input [value]="userObject.resume" type="text" class="form-control" id="res" name="resume" placeholder="Resume" disabled>
+                        <label for="res">Resume</label>
+                      </div> -->
+                      <div class="mt-3">
+                        <label for="floatingInput"> Update Resume :</label>
+                        <input type="file" name="newResume" id="newResume" (change)="getNewResume($event)" accept=".pdf"  formControlName="resume">
+                      </div>
+
+
+                      <!-- Display uploaded resume -->
+<!-- <div *ngIf="userObject.resume">
+    <embed [src]="userObject.resume" width="100%" height="600px" type="application/pdf">
+  </div> -->
+  
+  <!-- Provide a link to download the uploaded resume -->
+  <!-- <div *ngIf="userObject.resume">
+    <a [href]="userObject.resume" download="resume.pdf">Download added Resume</a>
+  </div> -->
+  
+  <!-- Button to view existing resume -->
+  <!-- <div *ngIf="userObject.resume">
+    <button type="button" class="btn btn-primary mt-3" (click)="viewResume()">View Resume</button>
+  </div>
+                       -->
+                      <!-- Display uploaded resume -->
+                      <!-- <div *ngIf="newResume">
+                        <embed [src]="newResume" width="100%" height="600px" type="application/pdf">
+                      </div>
+                       -->
+                      
+        
+        
+        
+        
+        
+        
+        
+                    
+        
+                </div>
+                <button  type="submit" class="btn btn-outline-success w-100 mt-3">Update</button>
+        
+            </div>
+            
+       </form>
+   </div>
+
+
+        </div>
+    </div>
+
+
+
+</div>

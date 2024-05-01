@@ -1,0 +1,230 @@
+<app-header></app-header>
+<a href="" style="text-decoration: none;color: green;">Back to Home</a>
+
+<div class="container text-center">
+
+    <div class=" p-1 text-center d-flex justify-content-center ">
+        <h5 class="me-2 text-success">Registered as : </h5> <button (click)="getUserForm()" type="button" class=" me-2 btn btn-outline-success">Job Seeker</button>
+        <button (click)="getEmpForm()" type="button" class="btn btn-outline-success">Employer</button>
+    </div>
+
+
+    <!-- image -->
+
+    <!-- <div class="container">
+        <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7965.jpg" alt="">
+
+    </div> -->
+
+
+
+    <!-- register as job seeker -->
+
+   <div *ngIf="!registerForm" class="container">
+       <form (ngSubmit)="signup()" [formGroup]="userSignUp">
+            <div class="row shadow p-5">
+                <h3 class="text-center text-dark">CREATE YOUR PROFILE</h3>
+                <div class="text-center">
+                    <label for="p1">
+        
+                        <input (change)="getFile($event)" type="file" id="p1" style="display: none;" formControlName="profile">
+                        <img style="border-radius: 50%;"
+                            [src]="profile"
+                            alt="" width="100px">
+        
+                    </label>
+                </div>
+        
+                <div class="col-lg-6 text-center ">
+                    
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="uuname" name="uname" placeholder="Name"
+                            formControlName="uname">
+                        <label for="floatingInput"> Name</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="eemail" name="email" placeholder="email"
+                            formControlName="email">
+                        <label for="floatingInput"> email</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="pphone" name="phone" placeholder="phone"
+                            formControlName="phone">
+                        <label for="floatingInput">Phone</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control " placeholder="Brief intro about yoursels" id="iintro"
+                            formControlName="intro"></textarea>
+                        <label for="floatingTextarea">Intro</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="date" class="form-control" id="date" name="ddate" placeholder="DOB" formControlName="dob" [max]="maxDate">
+                        <label for="floatingInput">DOB</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="qquali" name="quali" placeholder="Highest Qualification"
+                            formControlName="quali">
+                        <label for="floatingInput"> Highest Qualification</label>
+                    </div>
+                    
+        
+                </div>
+                <div class="col-lg-6 ">
+
+
+                   
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="strm" name="stream" placeholder="Stream"
+                            formControlName="stream">
+                        <label for="floatingInput"> Stream</label>
+                    </div>
+        
+        
+                    <div class="form-floating ">
+                        <input type="password" class="form-control" id="pwd1" name="pswd" placeholder="Password"
+                            formControlName="pwd">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <!-- <div class="form-floating mt-2">
+                        <input type="password" class="form-control" id="pwd2" name="pswd" placeholder=" Confirm Password"
+                            formControlName="cpwd">
+                        <label for="floatingPassword">Confirm Password</label>
+        
+                    </div> -->
+                    
+                    <div class="form-floating mt-2">
+                        <input type="text" class="form-control" id="loc" name="location" placeholder="Location"
+                            formControlName="loc">
+                        <label for="floatingPassword">Location</label>
+                    </div>
+                    <div class="form-floating mt-2">
+                        <input type="text" class="form-control" id="ds" name="desig" placeholder="Designation"
+                            formControlName="desig">
+                        <label for="floatingInput"> Designation</label>
+                    </div>
+                    <div class="mt-3">
+                        <span class="mt-5">Resume</span><span class="text-danger">(File format PDF only)</span><br>
+                        <input class="mt-3" type="file" name="resume" id="res" formControlName="resume" (change)="getResume($event)">
+                    </div>
+        
+        
+        
+        
+        
+        
+        
+                    
+        
+                </div>
+                <button  type="submit" class="btn btn-success w-100 mt-3">Register</button>
+                <p class="mt-3">already have an account? &nbsp;<a routerLink="/login">Login</a></p>
+        
+            </div>
+            
+       </form>
+   </div>
+
+
+
+    <!-- register a employer -->
+
+
+
+    <div *ngIf="registerForm" class="container">
+        <form (ngSubmit)="empsignup()" [formGroup]="empSignUp">
+             <div class="row shadow p-5">
+                 <h3 class="text-center text-dark">CREATE YOUR COMPANY PROFILE</h3>
+                 <div class="text-center">
+                     <label for="p1">
+         
+                         <input (change)="getFile($event)" type="file" id="p1" style="display: none;" formControlName="logo">
+                         <img style="border-radius: 50%;"
+                             [src]="logo"
+                             alt="" width="120px">
+         
+                     </label>
+                 </div>
+         
+                 <div class="col-lg-6 text-center ">
+                     <div class="form-floating mb-2">
+                         <input type="text" class="form-control" id="ffname" name="fname" placeholder="full Name"
+                             formControlName="uname">
+                         <label for="floatingInput">Full Name</label>
+                     </div>
+                     <div class="form-floating mb-2">
+                         <input type="text" class="form-control" id="ccname" name="cname" placeholder="Company Name"
+                             formControlName="cname">
+                         <label for="floatingInput">Company Name</label>
+                     </div>
+                     <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="webb" name="web" placeholder="Website"
+                            formControlName="website">
+                        <label for="floatingInput">Website</label>
+                    </div>
+                     <div class="form-floating mb-2">
+                         <input type="text" class="form-control" id="eemail" name="email" placeholder="email"
+                             formControlName="email">
+                         <label for="floatingInput"> email</label>
+                     </div>
+                     
+                    
+                     
+                     
+         
+                 </div>
+                 <div class="col-lg-6 ">
+
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="pphone" name="phone" placeholder="phone"
+                            formControlName="phone">
+                        <label for="floatingInput">Phone</label>
+                    </div>
+ 
+                    
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control " placeholder="Brief intro about your company" id="iintro"
+                            formControlName="intro"></textarea>
+                        <label for="floatingTextarea">Intro</label>
+                    </div>
+                    
+                     
+         
+         
+                     <div class="form-floating ">
+                         <input type="password" class="form-control" id="pwd1" name="pswd" placeholder="Password"
+                             formControlName="pwd">
+                         <label for="floatingPassword">Password</label>
+                     </div>
+                     <!-- <div class="form-floating mt-2">
+                         <input type="password" class="form-control" id="pwd2" name="pswd" placeholder=" Confirm Password"
+                             formControlName="cpwd">
+                         <label for="floatingPassword">Confirm Password</label>
+         
+                     </div> -->
+                     
+                     <div class="form-floating mt-2">
+                         <input type="text" class="form-control" id="loc" name="location" placeholder="Location"
+                             formControlName="loc">
+                         <label for="floatingPassword">Location</label>
+                     </div>
+                    
+                    
+         
+         
+         
+         
+         
+         
+         
+                     
+         
+                 </div>
+                 <button type="submit" class="btn btn-success w-100 mt-3">Register</button>
+                 <p class="mt-3">already have an account? &nbsp;<a routerLink="/login">Login</a></p>
+         
+             </div>
+             
+        </form>
+    </div>
+
+</div>

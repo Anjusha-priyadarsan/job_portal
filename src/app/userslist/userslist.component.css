@@ -1,0 +1,22 @@
+#nav{
+    height: 800px;
+   /* background-color:  rgb(171, 17, 17); */
+}
+#links a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    /* margin: 2px; */
+
+}
+hr{
+    color: grey;
+}
+
+@media (max-width:500px) {
+
+    #nav{
+        height: 450px;
+    }
+    
+}

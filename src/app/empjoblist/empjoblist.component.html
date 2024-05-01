@@ -1,0 +1,323 @@
+<app-header></app-header>
+
+<div class="row p-3 m-3">
+  <div class="col-lg-2  " id="nav">
+    <div class="row mt-3">
+      <div class="shadow p-3 text-center">
+        <img [src]="logo" width="100px"  style="border-radius: 50%;" alt="">
+        <h4 class="mt-2">{{empObject.companyname}}</h4>
+        <span class="text-secondary">{{empObject.username}}</span>
+    </div>
+
+    </div>
+    <div class="row  ">
+      <div id="links" class="shadow mt-3">
+        <hr>
+        <a routerLink="/empdash">
+          <div><i class="fa-solid fa-table-columns" ></i>&nbsp;&nbsp;Dashboard</div>
+        </a>
+
+        <hr>
+        <a routerLink="/editemp">
+          <div><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;Edit Profile</div>
+        </a>
+        <hr>
+
+
+        <a routerLink="/empjoblist">
+          <div style="background-color: #85d39d;" class="p-2"><i class="fa-solid fa-list"
+             ></i>&nbsp;&nbsp;Posted Job</div>
+        </a>
+        <hr>
+        <a routerLink="/jobapp">
+          <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Job Application</div>
+        </a>
+
+        <hr>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9 p-2 shadow mt-3 " style="margin-left: 20px;">
+
+    <div class="row m-2">
+
+      <div class="row">
+        <div class="col-lg-10">
+          <!-- <input class="form-control" class="w-100" type="text"> -->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input [(ngModel)]="jobTitle" type="text" class="form-control" placeholder="Search by job title"
+              aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <!-- <button id="addJobButton" data-bs-toggle="modal" data-bs-target="#addJobModal">Add Job</button> -->
+          <button type="button" class="btn btn-success" id="addJobButton" data-bs-toggle="modal"
+            data-bs-target="#addJobModal"><i class="fa-solid fa-circle-plus"></i>&nbsp;Post Job</button>
+        </div>
+      </div>
+
+      <div class="row mt-5 p-5">
+        <div *ngFor="let i of jobs | search : jobTitle : 'title' | paginate: { itemsPerPage: 4, currentPage: p }"
+          class="card mb-3" style="width: 48rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{i.title}}</h5>
+
+            <span><i class="fa-regular fa-clock"> {{i.type}}</i></span> <br>
+
+            <h6><i class="fa-solid fa-indian-rupee-sign"></i> {{i.salary}}</h6>
+
+
+
+
+
+            <button (click)="getSingleJob(i._id)" type="button" class="btn btn-success w-75 me-5" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Details</button>
+            <!-- <div class="d-flex justify-content-between"> -->
+            <button (click)="getSingleJob(i._id)" id="updateJobButton" data-bs-toggle="modal"
+              data-bs-target="#updateJobModal" type="button" class="btn btn-outline-warning me-2"><i
+                class="fa-solid fa-pen-to-square"></i></button>
+
+            <button (click)="removeJob(i._id)" type="button" class="btn btn-outline-danger"><i
+                class="fa-solid fa-trash"></i></button>
+            <!-- </div> -->
+            <!-- <button>Edit</button><button>Delete</button> -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<!-- Modal 1- add job -->
+<div class="modal fade w-100" id="addJobModal" tabindex="-1" aria-labelledby="addJobModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addJobModalLabel">Add Job Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add job form -->
+        <form>
+          <!-- Form fields go here -->
+          <div class="container mt-5 " style="width: 500px;">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header">
+                    Post Job
+                  </div>
+                  <div class="card-body">
+                    <form (ngSubmit)="postJob()" [formGroup]="jobPost">
+                      <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title" name="title"
+                          formControlName="title" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="jobDescription">Job Description</label>
+                        <textarea class="form-control" id="jobDescription" rows="3" placeholder="Enter job description"
+                          name="description" formControlName="description" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="jobNature">Job Nature</label>
+                        <select class="form-control" id="jobNature" formControlName="type" name="type" required>
+                          <option value="">Select job nature</option>
+                          <option value="fulltime">Full Time</option>
+                          <option value="parttime">Part Time</option>
+                          <option value="remote">Remote</option>
+                          <option value="freelance">Freelance</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="vacancies">Number of Vacancies</label>
+                        <input type="number" class="form-control" id="vacancies" placeholder="Enter number of vacancies"
+                          formControlName="vacancy" name="vacancy" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <input type="text" class="form-control" id="salary" placeholder="Enter salary"
+                          formControlName="salary" name="salary" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="experience">Experience Required</label>
+                        <input type="text" class="form-control" id="experience" placeholder="Enter required experience"
+                          formControlName="experiance" name="experiance" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="Qualification">Qualification Required</label>
+                        <input type="text" class="form-control" id="Qualification"
+                          placeholder="Enter required Qualification" formControlName="qualification"
+                          name="qualification" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="Skills">Skills Required</label>
+                        <input type="text" class="form-control" id="Skills" placeholder="Enter required Skills"
+                          formControlName="skills" name="skills" required>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="submitJob">Post</button>
+                      </div>
+                      <!-- <button type="submit" class="btn btn-primary">Post Job</button> -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- modal 2 -- update job -->
+
+
+<div class="modal fade w-100" id="updateJobModal" tabindex="-1" aria-labelledby="updateJobModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addJobModalLabel">Update Job Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- update job form -->
+        <form>
+          <!-- Form fields go here -->
+          <div class="container mt-5 " style="width: 500px;">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header">
+                    Update Job
+                  </div>
+                  <div class="card-body">
+                    <form (ngSubmit)="updateJob(singleJob._id)" [formGroup]="jobPost">
+                      <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input [(ngModel)]="singleJob.title" type="text" class="form-control" id="jobTitle"
+                          placeholder="Enter job title" name="title" formControlName="title" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="jobDescription">Job Description</label>
+                        <textarea [(ngModel)]="singleJob.description" class="form-control" id="jobDescription" rows="3"
+                          placeholder="Enter job description" name="description" formControlName="description"
+                          required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="jobNature">Job Nature</label>
+                        <select [(ngModel)]="singleJob.type" class="form-control" id="jobNature" formControlName="type"
+                          name="type" required>
+                          <option value="">Select job nature</option>
+                          <option value="fulltime">Full Time</option>
+                          <option value="parttime">Part Time</option>
+                          <option value="remote">Remote</option>
+                          <option value="freelance">Freelance</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="vacancies">Number of Vacancies</label>
+                        <input [(ngModel)]="singleJob.vacancy" type="number" class="form-control" id="vacancies"
+                          placeholder="Enter number of vacancies" formControlName="vacancy" name="vacancy" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <input [(ngModel)]="singleJob.salary" type="text" class="form-control" id="salary"
+                          placeholder="Enter salary" formControlName="salary" name="salary" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="experience">Experience Required</label>
+                        <input [(ngModel)]="singleJob.experiance" type="text" class="form-control" id="experience"
+                          placeholder="Enter required experience" formControlName="experiance" name="experiance"
+                          required>
+                      </div>
+                      <div class="form-group">
+                        <label for="Qualification">Qualification Required</label>
+                        <input [(ngModel)]="singleJob.qualification" type="text" class="form-control" id="Qualification"
+                          placeholder="Enter required Qualification" formControlName="qualification"
+                          name="qualification" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="Skills">Skills Required</label>
+                        <input [(ngModel)]="singleJob.skills" type="text" class="form-control" id="Skills"
+                          placeholder="Enter required Skills" formControlName="skills" name="skills" required>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="submitJob">Update</button>
+                      </div>
+                      <!-- <button type="submit" class="btn btn-primary">Post Job</button> -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- job details modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{singleJob.title}}</h1> <br>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>{{singleJob.type}}</li>
+          <li>Experiance:{{singleJob.experiance}}</li>
+          <li>Qualification:{{singleJob.qualification}}</li>
+          <li>Salary:{{singleJob.salary}}</li>
+          <li>Openings:{{singleJob.vacancy}}</li>
+
+
+
+        </ul>
+        <h3>Job Description</h3>
+        <p>{{singleJob.description}}</p>
+        <h3>Skills</h3>
+        <ul class="p-2">
+          <ng-container *ngIf="singleJob.skills">
+            <li *ngFor="let skill of singleJob.skills.split('\n')">{{ skill }}</li>
+          </ng-container>
+        </ul>
+
+        ...
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

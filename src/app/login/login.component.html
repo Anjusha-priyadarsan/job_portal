@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+
+<div class="container p-5">
+
+  <div class="container text-center ">
+    <div class="row shadow-lg rounded" id="bg">
+      <div class="col-lg-6 p-5">
+        <form (ngSubmit)="login()" [formGroup]="loginFormModel" >
+          <h1 style="color: rgb(6, 6, 6);">Login</h1>
+          <div class="form-floating mb-3 mt-5">
+            <input type="text" class="form-control" id="email1" name="email12" placeholder="name@example.com"
+            formControlName="email" >
+            <label for="floatingInput">Email address</label>
+          </div>
+          <!-- error message -->
+          <div *ngIf="loginFormModel.get('email')?.errors&&loginFormModel.get('email')?.touched">
+            <p class="text-danger">Please enter a valid email</p>
+          </div>
+          <div class="form-floating ">
+            <input type="password" class="form-control" id="pswd1" name="pswd123" placeholder="Password"
+            formControlName="pwd" >
+            <label for="floatingPassword">Password</label>
+          </div>
+           <!-- error message -->
+           <div *ngIf="loginFormModel.get('pwd')?.errors&&loginFormModel.get('pwd')?.touched">
+            <p class="text-danger">Password includes only letters,number and space</p>
+          </div>
+          <div class="form-floating ">
+            <button  type="submit" style="background-color: rgb(8, 8, 8);"
+              class="btn text-center text-light fw-bold p-3   form-control mt-5">Login</button>
+
+          </div>
+          <p class="mt-3">Don't have an account? &nbsp;<a routerLink="/register">Sign Up</a></p>
+
+        </form>
+      </div>
+      <div class="col-lg-6 p-5 mt-3 ">
+        <img class="img-fluid"
+          src="https://i.pinimg.com/736x/d1/54/66/d154660a6ae3104de2b0a314667a5ab6.jpg"
+          alt="" width="490px" height="440px">
+
+
+      </div>
+    </div>
+
+
+
+
+  </div>

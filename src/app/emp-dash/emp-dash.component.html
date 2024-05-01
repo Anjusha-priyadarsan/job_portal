@@ -1,0 +1,90 @@
+<app-header></app-header>
+
+<div class="row p-3 m-2">
+    <div class="col-lg-2  " id="nav">
+        <div class="row mt-3">
+            <div class="shadow p-3 text-center">
+                <img [src]="logo" width="100px" style="border-radius: 50%;" alt="">
+                <h4 class="mt-2">{{empObject.companyname}}</h4>
+                <span class="text-secondary">{{empObject.username}}</span>
+            </div>
+
+        </div>
+        <div class="row mt-3 ">
+            <div id="links" class="shadow ">
+                <hr>
+                <a routerLink="/empdash">
+                    <div style="background-color: #85d39d;" class="p-2"><i
+                            class="fa-solid fa-table-columns"></i>&nbsp;&nbsp;Dashboard</div>
+                </a>
+
+                <hr>
+                <a routerLink="/editemp">
+                    <div><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Edit Profile</div>
+                </a>
+                <hr>
+
+                <a routerLink="/empjoblist">
+                    <div><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Posted Job</div>
+                </a>
+                <hr>
+                <a routerLink="/jobapp">
+                    <div><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Job Application</div>
+                </a>
+
+                <hr>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 p-2">
+        <div class="row shadow">
+
+            <div class="row m-2 ">
+                <img src="https://media.licdn.com/dms/image/C5612AQFClXwEPLd9ow/article-cover_image-shrink_720_1280/0/1576151169163?e=2147483647&v=beta&t=AqwwAZBlIJTh9VtSYsIpSlKcNHbbE724npAcnvwOexI"
+                    alt="" height="200px">
+
+
+
+            </div>
+            <div class="row p-2 m-3">
+                <div class="col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{jobCount}}</h1>
+                            <span class="fw-bold fs-4">Total Job Posts</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{appCount}}</h1>
+                            <span class="fw-bold fs-4">Total Application</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{reviewed}}</h1>
+                            <span class="fw-bold fs-4">Total Application Reviewed</span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,46 @@
+#nav{
+    height: 800px;
+   /* background-color:  rgb(171, 17, 17); */
+}
+#links a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    /* margin: 2px; */
+
+}
+hr{
+    color: grey;
+}
+a div{
+    /* text-align: center; */
+}
+#banner1{
+    height:110px;
+    background-size: cover;
+    background-image: url(https://as2.ftcdn.net/v2/jpg/04/96/14/19/1000_F_496141976_T4MyfTdRHSsFubdH2r5Z3ePVOqvn0SL4.jpg);
+    /* animation: flash;  */
+    /* referring directly to the animation's @keyframe declaration */
+  /* animation-duration: 2s; */
+}
+@media (max-width:500px) {
+
+    #nav{
+        height: 550px;
+    }
+    
+}
+#banner2{
+    font-size: 15px;
+    font-weight: bold;
+    height:80px;
+    background-size: cover;
+    background-image: url(https://as2.ftcdn.net/v2/jpg/04/96/14/19/1000_F_496141976_T4MyfTdRHSsFubdH2r5Z3ePVOqvn0SL4.jpg);
+    animation: flash;
+     /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+}
+.demo-inline-calendar-card {
+    width: 200px;
+  }
+

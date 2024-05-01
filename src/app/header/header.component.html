@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg header shadow ">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand fw-bold fs-4"  > <img src="https://i.postimg.cc/0Q3SC07C/eps10-green-recruitment-search-job-vacancy-icon-or-logo-isolated-on-white-background-find-people-emp.png" alt="" width="60px">CareerVibe</a>
+  
+      <div class="collapse navbar-collapse search" id="navbarTogglerDemo02">
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+<!--           
+          <li class="nav-item">
+              <a routerLink=""  class="btn btn-outline-light log" ><i class="fa-solid fa-user " style="color: rgb(38, 155, 176);"></i> &nbsp;&nbsp;Home</a>
+          </li> -->
+          
+          <li *ngIf="!login" class="nav-item">
+            <button routerLink="/login"  class="btn btn-outline-dark log" type="submit"><i class="fa-solid fa-user " ></i> &nbsp;&nbsp;Login</button>
+        </li>
+        <li *ngIf="login" class="nav-item">
+          <button (click)="logout()"  routerLink="/login"  class="btn btn-outline-dark log" type="submit"><i class="fa-solid fa-user " ></i> &nbsp;&nbsp;Logout</button>
+
+      </li>
+          
+        </ul>
+       
+      </div>
+    </div>
+  </nav>
+  
+ 

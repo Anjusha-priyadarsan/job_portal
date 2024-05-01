@@ -1,0 +1,105 @@
+<app-header></app-header>
+
+<div class="row p-3 m-2">
+  <div class="col-lg-2  " id="nav">
+    <div class="row mt-3">
+      <div class="shadow p-3 text-center">
+        <img [src]="adObject.profile" width="100px" style="border-radius: 50%;" alt="">
+        <h4 class="mt-2">{{adObject.username}}</h4>
+      </div>
+
+    </div>
+    <div class="row mt-3 ">
+      <div id="links" class="shadow ">
+        <hr>
+        <a routerLink="/admindash">
+          <div><i class="fa-solid fa-table-columns"></i>&nbsp;&nbsp;Dashboard</div>
+        </a>
+
+        <hr>
+        <a routerLink="/adminedit">
+          <div><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Edit Profile</div>
+        </a>
+        <hr>
+
+        <a routerLink="/userlist">
+          <div style="background-color: #85d39d;" class="p-2"><i class="fa-solid fa-list"></i>&nbsp;&nbsp; Job Seekers</div>
+        </a>
+        <hr>
+        <a routerLink="/emplist">
+          <div ><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Employers</div>
+        </a>
+
+        <hr>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9 p-2 shadow" style="margin-left: 20px;">
+    <div class="row">
+      <div class="col-lg-10">
+        <!-- <input class="form-control" class="w-100" type="text"> -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input  type="text" class="form-control" placeholder="Search by user name" aria-label="Username" [(ngModel)]="userName"
+            aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <button (click)="convertPdf()" type="button" class="btn btn-dark w-75 text-light">Export as <i
+          class="fa-solid fa-file-pdf" style="color: #ffffff;"></i></button>
+      </div>
+      
+    </div>
+
+    <div class="row m-2">
+
+      <div class="table-responsive">
+        <table class="table table-success p-3 ">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col"> Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">place</th>
+              <th>Photo</th>
+              <th scope="col">phone</th>
+              <th scope="col">DesigNation</th>
+  
+  
+  
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let user of users  | usersearch : userName : 'username'| paginate: { itemsPerPage: 4, currentPage: p }; let i=index" >
+              <td>{{i+1}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.location}}</td>
+              <td><img [src]="user.profile" alt="" width="50px"></td>
+              <td>{{user.phone}}</td>
+              <td>{{user.designation}}</td>
+  
+              
+            </tr>
+  
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="text-center">
+                <pagination-controls (pageChange)="p = $event" style="color: green;"></pagination-controls>
+        
+              </div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+</div>

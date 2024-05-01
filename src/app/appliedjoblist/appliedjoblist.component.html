@@ -1,0 +1,106 @@
+<app-header></app-header>
+
+<div class="row p-3 m-2">
+    <div class="col-lg-2  " id="nav">
+        <div class="row mt-3">
+            <div class="shadow p-3 text-center">
+                <img [src]="userObject.profile" width="80px" height="80px" style="border-radius: 50%;" alt="">
+                <h4 class="mt-2">{{userObject.username}}</h4>
+                <span class="text-secondary">{{userObject.designation}}</span>
+            </div>
+
+        </div>
+        <div class="row mt-3 ">
+            <div id="links" class="shadow ">
+                <hr>
+                <a routerLink="/userdash">
+                    <div class="p-2"><i class="fa-solid fa-table-columns"
+                            ></i>&nbsp;&nbsp;Dashboard</div>
+                </a>
+
+                <hr>
+                <a routerLink="/edituser">
+                    <div><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;Edit Profile
+                    </div>
+                </a>
+                <hr>
+                <a routerLink="/appliedjobs">
+                    <div style="background-color: #85d39d;" class="p-2"><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Applied Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/savedjobs">
+                    <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Saved Jobs</div>
+                </a>
+                <hr>
+                <a routerLink="/searchjob">
+                    <div><i class="fa-solid fa-list" ></i>&nbsp;&nbsp;Jobs</div>
+                </a>
+                <hr>
+
+
+            </div>
+        </div>
+    </div>
+    <div  class="col-lg-9 p-2 shadow mt-3 " style="margin-left: 23px;">
+
+        <div class="row m-2">
+
+            <div class="row">
+                
+                    <!-- <input class="form-control" class="w-100" type="text"> -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i
+                                class="fa-solid fa-magnifying-glass"></i></span>
+                        <input [(ngModel)]="jobTitle" type="text" class="form-control" placeholder="Search by job title" aria-label="Username"
+                            aria-describedby="basic-addon1" >
+                    </div>
+                
+                
+            </div>
+
+            <div class="row mt-5 p-5">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div *ngIf="error" class="alert alert-danger" role="alert">
+                      {{ error }}
+                    </div>
+                    <div *ngIf="jobs.length === 0 && !error" class="alert alert-info" role="alert">
+                      No jobs found.
+                    </div>
+                    <!-- Loop through each job and display it as a card -->
+                    <div *ngFor="let job of jobs  | appliedjobsearch : jobTitle : 'title' " class="col-lg-12 mb-4">
+                      <div class="card shadow" >
+                        <div class="row g-0">
+                          <!-- Image column -->
+                          <div class="col-md-4 p-3">
+                            <img src="{{ job.company.logo }}" width="100px"  class="" alt="Company Logo">
+                          </div>
+                          <!-- Details column -->
+                          <div class="col-md-8">
+                            <div class="card-body mt-3">
+                              <h5 class="card-title">{{ job.appliedjob.title }}</h5>
+                             
+                                <h6 class="list-group-item">Location: {{ job.company.location }}</h6>
+
+                                <h6 class="list-group-item">Salary: {{ job.appliedjob.salary }}</h6>
+                               
+                              <!-- Show status based on the value -->
+                              <h6>Status:
+                                <span *ngIf="job.appliedjob.status =='0' " class="text-warning">Pending</span>
+                                <span *ngIf="job.appliedjob.status == '-1'" class="text-danger">Rejected</span>
+                                <span *ngIf="job.appliedjob.status == '1'" class="text-success">Under Review</span>
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+        </div>
+
+
+
+    </div>

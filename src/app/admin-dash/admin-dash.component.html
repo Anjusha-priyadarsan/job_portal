@@ -1,0 +1,86 @@
+<app-header></app-header>
+<div class="row p-3 m-2">
+    <div class="col-lg-2  " id="nav">
+        <div class="row mt-3">
+            <div class="shadow p-3 text-center">
+                <img  [src]="adObject.profile" width="80px" height="80px" style="border-radius: 50%;" alt="">
+                <h4 class="mt-2">{{adObject.username}}</h4>
+            </div>
+
+        </div>
+        <div class="row mt-3 ">
+            <div id="links" class="shadow ">
+                <hr>
+                <a routerLink="/admindash">
+                    <div  style="background-color: #85d39d;" class="p-2"><i class="fa-solid fa-table-columns" ></i>&nbsp;&nbsp;Dashboard</div>
+                </a>
+                
+                <hr>
+                <a routerLink="/adminedit">
+                    <div><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;Edit Profile</div>
+                </a>
+                <hr>
+                <a routerLink="/userlist">
+                    <div><i class="fa-solid fa-address-card " ></i>&nbsp;&nbsp; Job Seekers</div>
+                </a>
+                <hr>
+                <a routerLink="/emplist">
+                    <div><i class="fa-solid fa-address-card" ></i>&nbsp;&nbsp;Employers</div>
+                </a>
+                <hr>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10   p-2">
+
+        <div class="row shadow m-2">
+            <div class="row m-2 ">
+                <img src="https://st5.depositphotos.com/49078592/61713/i/450/depositphotos_617138032-stock-photo-hand-writing-sign-jobs-business.jpg" style="opacity: .8;"
+                    alt="" height="200px">
+
+
+
+            </div>
+            <div class="row p-2 m-3">
+                <div class="col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{empCount}}</h1>
+                            <span class="fw-bold fs-4"> Employers</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{userCount}}</h1>
+                            <span class="fw-bold fs-4">Job Seekers</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="fluid col-lg-4 p-2">
+                    <div class="card shadow" style="width: auto; height: 12rem;background-color: #cce3d3;">
+                        <div class="card-body text-center">
+                            <h1 class="text-success mt-5">{{jobCount}}</h1>
+                            <span class="fw-bold fs-4"> Jobs</span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+        </div>
+    </div>
+
+
+
+</div>
